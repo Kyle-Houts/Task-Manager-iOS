@@ -14,7 +14,10 @@ class TaskViewController: UIViewController, UITableViewDataSource, UITableViewDe
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
         filterTasks()
+        
+
         
     }
     
@@ -59,6 +62,7 @@ class TaskViewController: UIViewController, UITableViewDataSource, UITableViewDe
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
+    
     func filterTasks() {
         //Set the completedTasks array equal to the filtered task array
         switch completionSegmentedController.selectedSegmentIndex {
@@ -88,12 +92,13 @@ class TaskViewController: UIViewController, UITableViewDataSource, UITableViewDe
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let destination = segue.destination as?
             EditTaskViewController {
-            // We need to pass through the Game that we'll be editing.
+            // We need to pass through the Task that we'll be editing.
             destination.taskToEdit = currentTask
         }
+        // Passes data to DetailsViewController
         if let destination = segue.destination as?
             DetailsViewController {
-            // We need to pass through the Game that we'll be editing.
+            // We need to pass through the Task that we'll be editing.
             destination.taskDetails = currentTask
         }
     }
@@ -108,8 +113,11 @@ class TaskViewController: UIViewController, UITableViewDataSource, UITableViewDe
             
             // Remove the game at the current index from the game array
             TaskManager.sharedInstance.removeTask(at: indexPath.row)
+
             // Delete the row from the table view at the current index path
             tableView.deleteRows(at: [indexPath], with: .fade)
+            
+            self.taskTableView.reloadData()
         }
         
         
@@ -120,12 +128,8 @@ class TaskViewController: UIViewController, UITableViewDataSource, UITableViewDe
         }
         
         
-//        let markCompleteAction = UITableViewRowAction(style: .normal, title: "Mark Complete/Incomplete") { _, _ in
-//            TaskManager.sharedInstance.markComplete(at: indexPath.row)
-//            tableView.reloadRows(at: [indexPath], with: .fade)
-//        }
         
-        let descriptionAction = UITableViewRowAction(style: .normal, title: "Description") { _, _ in
+        let descriptionAction = UITableViewRowAction(style: .normal, title: "Details") { _, _ in
             self.currentTask = TaskManager.sharedInstance.getTaskIndex(at: indexPath.row)
             self.performSegue(withIdentifier: "showDetailsScreen", sender: self)
         }

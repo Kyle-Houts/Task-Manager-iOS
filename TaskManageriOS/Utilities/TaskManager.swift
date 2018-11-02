@@ -21,7 +21,7 @@ class TaskManager {
     
     
     // Array of default tasks
-    var taskArray: [Task] = [Task(title: "Make Dinner", details: "Cook pot roast", taskStatus: false), Task(title: "Mow Lawn", details: "Mow this weekend", taskStatus: false), Task(title: "Vacuum house", details: "Especially the living room", taskStatus: true)]
+    var taskArray: [Task] = [Task(title: "Clean house", details: "Deep clean", taskStatus: false, taskPhoto: UIImage(named: "house.jpeg")), Task(title: "Mow Lawn", details: "Mow this weekend", taskStatus: false, taskPhoto: UIImage(named: "lawn.jpeg")), Task(title: "Do dishes", details: "Gross", taskStatus: true, taskPhoto: UIImage(named: "dishes.jpeg"))]
     
     var completedtaskArray: [Task] = []
     
@@ -49,9 +49,11 @@ class TaskManager {
     // Function to delete a task
     func removeTask(at index: Int) {
         
+        completedtaskArray.remove(at: index)
         taskArray.remove(at: index)
-        
     }
+    
+
     
     // Function to mark task complete
     func markComplete(at index: Int) {

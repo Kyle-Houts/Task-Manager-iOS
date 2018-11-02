@@ -18,12 +18,15 @@ class Task {
     
     var taskStatus: Bool
     
+    var taskPhoto: UIImage?
     
-    init(title: String, details: String, taskStatus: Bool) {
+    
+    init(title: String, details: String, taskStatus: Bool, taskPhoto: UIImage?) {
         
         self.title = title
         self.details = details
         self.taskStatus = taskStatus
+        self.taskPhoto = taskPhoto
     }
     
     
